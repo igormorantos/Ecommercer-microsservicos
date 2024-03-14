@@ -15,7 +15,7 @@ var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
 builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8, 3, 0))));
 builder.Services.AddControllers();
 builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer(options =>
+    .AddJwtBearer("Bearer", options =>
     {
         options.Authority = "https://localhost:4435/";
         options.TokenValidationParameters = new TokenValidationParameters 
