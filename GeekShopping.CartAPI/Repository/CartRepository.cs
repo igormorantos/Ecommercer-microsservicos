@@ -4,6 +4,7 @@ using GeekShopping.CartAPI.Model;
 using GeekShopping.CartAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace GeekShopping.CartAPI.Repository
 {
     public class CartRepository : ICartRepository
@@ -44,6 +45,7 @@ namespace GeekShopping.CartAPI.Repository
 
             cart.CartDetails = _cartRepository.CartDetails.Where(c => c.CartHeaderId == cart.CartHeader.Id)
                 .Include(c => c.Product);
+
             return _mapper.Map<CartVO>(cart);
         }
 
@@ -103,11 +105,12 @@ namespace GeekShopping.CartAPI.Repository
             else
             {
                 var cartDetail = await _cartRepository.CartDetails.AsNoTracking().FirstOrDefaultAsync(
-                    p => p.ProductId == vo.CartDetails.FirstOrDefault().ProductId &&
+                    p => p.ProductId == cart.CartDetails.FirstOrDefault().ProductId &&
                     p.CartHeaderId == cartHeader.Id);
+                
                 if (cartDetail == null)
                 {
-                    cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
+                    cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeader.Id;
                     cart.CartDetails.FirstOrDefault().Product = null;
                     _cartRepository.CartDetails.Add(cart.CartDetails.FirstOrDefault());
                     await _cartRepository.SaveChangesAsync();
@@ -118,6 +121,7 @@ namespace GeekShopping.CartAPI.Repository
                     cart.CartDetails.FirstOrDefault().Count += cartDetail.Count;
                     cart.CartDetails.FirstOrDefault().Id = cartDetail.Id;
                     cart.CartDetails.FirstOrDefault().CartHeaderId = cartDetail.CartHeaderId;
+                    _cartRepository.CartDetails.Update(cart.CartDetails.FirstOrDefault());
                     _cartRepository.SaveChangesAsync();
                 }
             }
