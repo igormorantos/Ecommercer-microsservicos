@@ -1,8 +1,8 @@
-﻿@model IEnumerable<GeekShopping.web.Models.ProductViewModel>
+﻿@model IEnumerable<GeekShopping.Web.Models.ProductViewModel>
 
 <br/>
 <br/>
-<div class ="container p-4 border">
+<div class="container p-4 border">
     <div class="row pb-2">
         <div class="col">
             <h1 class="text-primary">Products List</h1>
@@ -28,7 +28,8 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var item in Model){
+            @foreach (var item in Model)
+            {
                 <tr>
                     <td>
                         @item.Name
@@ -40,14 +41,14 @@
                         @((item.Price).ToString("c"))
                     </td>
                     <td>
-                        <a asp-action="ProductUpdate" class="btn btn-success" asp-route-id="@item.Id">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        @if(User.IsInRole("Admin")){
-                            <a asp-action="ProductDelete" class="btn btn-danger" asp-route-id="@item.Id">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        }
+                       <a asp-action="ProductUpdate" class="btn btn-success" asp-route-id="@item.Id">
+                           <i class="fas fa-edit"></i>
+                       </a>
+                       @if(User.IsInRole("Admin")){
+                           <a asp-action="ProductDelete" class="btn btn-danger" asp-route-id="@item.Id">
+                               <i class="fas fa-trash"></i>
+                           </a>
+                       }
                     </td>
                 </tr>
             }
