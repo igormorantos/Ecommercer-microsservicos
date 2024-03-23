@@ -1,3 +1,4 @@
+using GeekShopping.web.Services;
 using GeekShopping.Web.Services;
 using GeekShopping.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
@@ -10,9 +11,9 @@ builder.Services.AddHttpClient<IProductService, ProductService>(
 builder.Services.AddHttpClient<ICartService, CartService>(c =>
         c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CartAPI"])
     );
-//builder.Services.AddHttpClient<ICouponService, CouponService>(c =>
-  //      c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponAPI"])
-    //);
+builder.Services.AddHttpClient<ICouponService, CouponService>(c =>
+        c.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponAPI"])
+    );
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

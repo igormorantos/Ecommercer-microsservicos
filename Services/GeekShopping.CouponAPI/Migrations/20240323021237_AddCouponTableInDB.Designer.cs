@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeekShopping.CouponAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20240321225318_SetCouponDataBase")]
-    partial class SetCouponDataBase
+    [Migration("20240323021237_AddCouponTableInDB")]
+    partial class AddCouponTableInDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
