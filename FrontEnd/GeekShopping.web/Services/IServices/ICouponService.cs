@@ -1,5 +1,4 @@
-﻿using GeekShopping.web.Models;
-using GeekShopping.Web.Models;
+﻿using GeekShopping.Web.Models;
 using System.Threading.Tasks;
 
 namespace GeekShopping.Web.Services.IServices
@@ -7,6 +6,5 @@ namespace GeekShopping.Web.Services.IServices
     public interface ICouponService
     {
         Task<CouponViewModel> GetCoupon(string code, string token);
-
      }
 }

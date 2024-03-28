@@ -1,10 +1,15 @@
-﻿using GeekShopping.web.Models;
+﻿using GeekShopping.Web.Models;
 using GeekShopping.Web.Services.IServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Threading.Tasks;
 using GeekShopping.Web.Utils;
 using System.Net;
-using System.Net.Http.Headers;
 
-namespace GeekShopping.web.Services
+namespace GeekShopping.Web.Services
 {
     public class CouponService : ICouponService
     {

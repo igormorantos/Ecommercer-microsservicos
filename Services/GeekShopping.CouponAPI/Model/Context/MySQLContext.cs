@@ -16,13 +16,13 @@ namespace GeekShopping.CouponAPI.Model.Context
             modelBuilder.Entity<Coupon>().HasData(new Coupon
             {
                 Id = 1,
-                CouponCode = "ERUDIO_2022_10",
+                CouponCode = "igor",
                 DiscountAmount = 10
             });
             modelBuilder.Entity<Coupon>().HasData(new Coupon
             {
                 Id = 2,
-                CouponCode = "ERUDIO_2022_15",
+                CouponCode = "igor2",
                 DiscountAmount = 15
             });
         }
