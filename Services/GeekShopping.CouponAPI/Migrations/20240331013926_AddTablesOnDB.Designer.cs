@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeekShopping.CouponAPI.Migrations
 {
     [DbContext(typeof(MySQLContext))]
-    [Migration("20240324220210_AddCouponDB2")]
-    partial class AddCouponDB2
+    [Migration("20240331013926_AddTablesOnDB")]
+    partial class AddTablesOnDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,13 +45,13 @@ namespace GeekShopping.CouponAPI.Migrations
                         new
                         {
                             Id = 1L,
-                            CouponCode = "igor",
+                            CouponCode = "ERUDIO_2022_10",
                             DiscountAmount = 10m
                         },
                         new
                         {
                             Id = 2L,
-                            CouponCode = "igor2",
+                            CouponCode = "ERUDIO_2022_15",
                             DiscountAmount = 15m
                         });
                 });

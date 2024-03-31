@@ -2,27 +2,33 @@
 using GeekShopping.CouponAPI.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace GeekShopping.CouponAPI.Controller
+namespace GeekShopping.CouponAPI.Controllers
 {
 
     [Route("api/v1/[controller]")]
     [ApiController]
     public class CouponController : ControllerBase
     {
-        private ICouponRepository _couponRepository;
+        private ICouponRepository _repository;
 
-        public CouponController(ICouponRepository couponRepository)
+        public CouponController(ICouponRepository repository)
         {
-            _couponRepository = couponRepository ?? throw new ArgumentNullException(nameof(couponRepository)); ;
+            _repository = repository ?? throw new
+                ArgumentNullException(nameof(repository));
         }
 
         [HttpGet("{couponCode}")]
-        [Authorize]
         public async Task<ActionResult<CouponVO>> GetCouponByCouponCode(string couponCode)
         {
-            var coupon = await _couponRepository.GetCouponByCouponCode(couponCode);
-            if (coupon.Id <= 0) return NotFound();
+            // var token = await HttpContext.GetTokenAsync("access_token");
+            var coupon = await _repository.GetCouponByCouponCode(couponCode);
+            if (coupon == null) return NotFound();
             return Ok(coupon);
         }
     }

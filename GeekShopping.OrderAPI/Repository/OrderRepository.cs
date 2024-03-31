@@ -1,4 +1,5 @@
-﻿using GeekShopping.OrderAPI.Model;
+﻿
+using GeekShopping.OrderAPI.Model;
 using GeekShopping.OrderAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using System;

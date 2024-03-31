@@ -2,22 +2,38 @@ using AutoMapper;
 using GeekShopping.CouponAPI.Config;
 using GeekShopping.CouponAPI.Model.Context;
 using GeekShopping.CouponAPI.Repository;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Collections.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
+var connection = builder.Configuration["MySQlConnection:MySQlConnectionString"];
 
-builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8, 3, 0))));
+builder.Services.AddDbContext<MySQLContext>(options => options.UseMySql(
+    connection,
+        new MySqlServerVersion(
+            new Version(8, 0, 29))));
+
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+
 builder.Services.AddControllers();
+
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "https://localhost:4450/";
+        options.Authority = "https://localhost:4435/";
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateAudience = false
@@ -49,29 +65,22 @@ builder.Services.AddSwaggerGen(c =>
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-    {
-        new OpenApiSecurityScheme
         {
-            Reference = new OpenApiReference
+            new OpenApiSecurityScheme
             {
-                Type = ReferenceType.SecurityScheme,
-                Id = "Bearer"
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In= ParameterLocation.Header
             },
-            Scheme = "oauth2",
-            Name = "Bearer",
-            In= ParameterLocation.Header
-        },
-        new List<string> ()
+            new List<string> ()
         }
-  });
+    });
 });
-
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-
-
-//incluindo os repositorios
-builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 
 var app = builder.Build();
 
@@ -79,10 +88,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GeekShopping.CouponAPI v1"));
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseAuthentication();
 

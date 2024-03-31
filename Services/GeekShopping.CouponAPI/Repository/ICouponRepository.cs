@@ -1,4 +1,5 @@
 ﻿using GeekShopping.CouponAPI.Data.ValueObjects;
+using System.Threading.Tasks;
 
 namespace GeekShopping.CouponAPI.Repository
 {
