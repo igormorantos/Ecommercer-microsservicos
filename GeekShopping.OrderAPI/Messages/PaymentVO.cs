@@ -14,7 +14,7 @@ namespace GeekShopping.OrderAPI.Messages
 
         public string ExpiryMonthYear { get; set; }
         
-        public string PurchaseAmount { get; set; }
+        public decimal PurchaseAmount { get; set; }
 
         public string Email { get; set; }
 

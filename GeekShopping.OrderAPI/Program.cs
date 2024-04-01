@@ -1,5 +1,6 @@
 ﻿using GeekShopping.OrderAPI.MessageConsumer;
 using GeekShopping.OrderAPI.Model.Context;
+using GeekShopping.OrderAPI.RabbitMQSender;
 using GeekShopping.OrderAPI.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,8 @@ dbContextBuilder.UseMySql(
 builder.Services.AddSingleton(new OrderRepository(dbContextBuilder.Options));
 
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
+builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 builder.Services.AddControllers();
 
@@ -57,7 +60,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "GeekShopping.OrderAPI", Version = "v1" });
-    c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"Enter 'Bearer' [space] and your token!",
@@ -90,6 +92,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GeekShopping.OrderAPI v1"));
 }
