@@ -12,4 +12,4 @@ namespace GeekShopping.MessageBus
 
         public DateTime MessageCreated { get; set; }
     }
-}
+} 
