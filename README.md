@@ -62,6 +62,5 @@ A arquitetura do GeekShopping é composta por diversos microsserviços interliga
 
 Pré-requisitos:
 
-Docker instalado e configurado
-Kubernetes instalado e configurado
-Banco de dados PostgreSQL
+- Docker instalado e configurado
+- Banco de dados MySQL
