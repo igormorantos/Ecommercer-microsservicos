@@ -1,4 +1,4 @@
-# Geek-Hunter_Microservice_Eccomerce
+# Ecommerce-Microsserviços
 
 ## Objetivo
 
@@ -8,25 +8,60 @@ O GeekShopping é um projeto de e-commerce completo, desenvolvido com microsserv
 
 A arquitetura do GeekShopping é composta por diversos microsserviços interligados, cada um com uma responsabilidade específica. A comunicação entre os serviços é realizada através de APIs RESTful e barramento de mensagens.
 
-## Microsserviços
+## Microsserviços e Funcionalidades
 
-- `GeekShopping.Web`: Frontend do projeto, desenvolvido com ASP.NET Core MVC e Razor Pages. Consome APIs dos demais microsserviços para apresentar a interface do e-commerce.
-- `GeekShopping.APIGateway`: Gateway de API que serve como intermediário entre o frontend e os demais microsserviços. Intercepta solicitações, aplica validações e roteia para o serviço correto.
-- `GeekShopping.IdentityServer`: Serviço de autenticação e autorização, baseado em IdentityServer4. Gerencia tokens de acesso e garante a segurança do sistema.
-- `GeekShopping.CatalogAPI`: Gerencia o catálogo de produtos, incluindo CRUD, pesquisa e filtros.
-- `GeekShopping.CartAPI`: Gerencia o carrinho de compras do usuário, permitindo adicionar, remover e atualizar itens.
-- `GeekShopping.OrderAPI`: Gerencia pedidos, incluindo criação, pagamento e acompanhamento.
-- `GeekShopping.PaymentProcessor`: Processa pagamentos online através de integração com provedores de pagamento.
-- `GeekShopping.CouponAPI`: Gerencia cupons de desconto, incluindo criação, validação e aplicação em pedidos.
-- `GeekShopping.Email`: Envia emails transacionais, como confirmação de pedido e recuperação de senha.
-- `GeekShopping.MessageBus`: Barramento de mensagens que utiliza RabbitMQ para comunicação assíncrona entre os microsserviços.
+### Frontend:
+
+`GeekShopping.Web`:
+- Interface do e-commerce desenvolvida com ASP.NET Core MVC e Razor Pages.
+- Consome APIs dos demais microsserviços para apresentar produtos, gerenciar carrinho de compras, realizar pedidos e acompanhar entregas.
+- Gerenciamento de Usuários e Autenticação:
+
+`GeekShopping.IdentityServer`:
+- Serviço de autenticação e autorização baseado em IdentityServer4.
+- Gerencia usuários e suas credenciais, tokens de acesso e garante a segurança do sistema.
+
+`GeekShopping.ProductAPI`:
+- Gerencia o catálogo de produtos, incluindo CRUD, pesquisa e filtros.
+- Permite adicionar, editar, excluir e obter detalhes de produtos.
+
+`GeekShopping.CartAPI`:
+- Gerencia o carrinho de compras do usuário.
+- Permite adicionar, remover e atualizar itens, obter o total do carrinho e limpá-lo.
+
+`GeekShopping.CouponAPI`:
+- Gerencia cupons de desconto.
+- Permite criar, validar e aplicar cupons em pedidos.
+
+`GeekShopping.OrderAPI`:
+- Gerencia pedidos, incluindo criação, pagamento e acompanhamento.
+- Permite criar pedidos, gerenciar pagamentos e acompanhar o status dos pedidos.
+
+`GeekShopping.PaymentAPI`:
+- Processa pagamentos online através de integração com provedores de pagamento.
+- Permite processar pagamentos com cartão de crédito, PayPal e outros métodos.
+  
+`GeekShopping.Email`:
+- Envia emails transacionais como confirmação de pedido e recuperação de senha.
+
+`GeekShopping.MessageBus`:
+- Barramento de mensagens que utiliza RabbitMQ para comunicação assíncrona entre os microsserviços.
 
 ## Tecnologias
+- C#/.NET
+- ASP.NET Core
+- Docker
+- RabbitMQ
+- Ocelot
+- IdentityServer4
+- Entity Framework Core
+- MySQL
 
-ASP.NET Core
-Docker
-RabbitMQ
-Ocelot
-IdentityServer4
-Entity Framework Core
-MySQL
+  
+## Instalação e Configuração
+
+Pré-requisitos:
+
+Docker instalado e configurado
+Kubernetes instalado e configurado
+Banco de dados PostgreSQL
