@@ -1,6 +1,17 @@
 <h1 align="center">Geek Shopping Microsserviços</h1>
 <p align="center"><i>O GeekShopping é um projeto de e-commerce completo, desenvolvido com microsserviços e tecnologias de ponta. Esta documentação visa fornecer uma visão geral da arquitetura do projeto, funcionalidades dos microsserviços e instruções para instalação e configuração.</i></p>
 
+<p align="center">
+  <img src="http://img.shields.io/badge/Licença-MIT-green"/>
+  <img src="https://img.shields.io/github/languages/top/igormorantos/Ecommercer-microsservicos"/>
+  <img src="http://img.shields.io/badge/.NET-8-blue"/>
+  <img src="https://img.shields.io/github/last-commit/igormorantos/Ecommercer-microsservicos"/>
+  <img src="http://img.shields.io/badge/Status-Em Desenvolvimento-green "/>
+  <img src ="https://img.shields.io/github/commit-activity/t/igormorantos/Ecommercer-microsservicos"/>
+  <img src="https://img.shields.io/github/languages/count/igormorantos/Ecommercer-microsservicos"/>
+
+</p>
+
 ## Objetivo
 
 Criar uma ecommercer utilizando a arquitetura de microserviços, deixando cada função totalmente segregada podendo cada serviço ser deployado individualmente.
@@ -63,9 +74,19 @@ A arquitetura do GeekShopping é composta por diversos microsserviços interliga
 Pré-requisitos:
 
 - .NET 6.0
+- Docker
 - Banco de dados MySQL
+- Container de rabbitMQ com interface grafica rodando nas portas `15672:15672` e `5672:5672`
 
-## Running
+
+## Como rodar o Projeto
+
+- Não esqueça de inserir as suas credenciais de banco de dados no `appsettings.json` de cada projeto.
+
+No projeto `GeekShopping.web` rode o comando:
+```
 dotnet run
+```
+
 
 
