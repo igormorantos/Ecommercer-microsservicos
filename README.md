@@ -38,36 +38,53 @@ A arquitetura do GeekShopping é composta por diversos microsserviços interliga
 - Interface do e-commerce desenvolvida com ASP.NET Core MVC e Razor Pages.
 - Consome APIs dos demais microsserviços para apresentar produtos, gerenciar carrinho de compras, realizar pedidos e acompanhar entregas.
 - Gerenciamento de Usuários e Autenticação:
+![1](https://github.com/igormorantos/Ecommercer-microsservicos/assets/94862012/ab129320-5530-4afe-a413-b11a0148e045)
 
 `GeekShopping.IdentityServer`:
 - Serviço de autenticação e autorização baseado em IdentityServer4.
 - Gerencia usuários e suas credenciais, tokens de acesso e garante a segurança do sistema.
+![2](https://github.com/igormorantos/Ecommercer-microsservicos/assets/94862012/c4bc454e-c293-4239-9cd2-b65e738d1cba)
 
 `GeekShopping.ProductAPI`:
 - Gerencia o catálogo de produtos, incluindo CRUD, pesquisa e filtros.
 - Permite adicionar, editar, excluir e obter detalhes de produtos.
+![3](https://github.com/igormorantos/Ecommercer-microsservicos/assets/94862012/11dc7575-4645-45d1-9f9f-cf604cee4aa6)
 
 `GeekShopping.CartAPI`:
 - Gerencia o carrinho de compras do usuário.
 - Permite adicionar, remover e atualizar itens, obter o total do carrinho e limpá-lo.
+![5](https://github.com/igormorantos/Ecommercer-microsservicos/assets/94862012/3c2fe3b8-e4f8-4d54-bda6-8dd7c7e171d8)
 
 `GeekShopping.CouponAPI`:
 - Gerencia cupons de desconto.
 - Permite criar, validar e aplicar cupons em pedidos.
+![6](https://github.com/igormorantos/Ecommercer-microsservicos/assets/94862012/95eeea02-145d-4859-b5b0-0d95f7fb590e)
 
 `GeekShopping.OrderAPI`:
 - Gerencia pedidos, incluindo criação, pagamento e acompanhamento.
 - Permite criar pedidos, gerenciar pagamentos e acompanhar o status dos pedidos.
+- Não possui controller pois faz o gerenciamento de forma interna, sem a nescessidade de um controller
+![7](https://github.com/igormorantos/Ecommercer-microsservicos/assets/94862012/09183fe4-4379-4c13-a175-573615de19e7)
 
 `GeekShopping.PaymentAPI`:
-- Processa pagamentos online através de integração com provedores de pagamento.
-- Permite processar pagamentos com cartão de crédito, PayPal e outros métodos.
-  
+- Implementação futura: Processa pagamentos online através de integração com provedores de pagamento.
+- Atualmente é um mock onde os pagamentos sempre são aprovados
+- Não possui controller pois faz o gerenciamento de forma interna, sem a nescessidade de um controller
+  ![8](https://github.com/igormorantos/Ecommercer-microsservicos/assets/94862012/26dcdff4-22a5-4bcb-996b-baf882f3af3d)
+
 `GeekShopping.Email`:
-- Envia emails transacionais como confirmação de pedido e recuperação de senha.
+- Implementação futura: Envia emails transacionais como confirmação de pedido e recuperação de senha.
+- Atualmente é um Mock com informações da compra mas o email não é enviado.
+![8](https://github.com/igormorantos/Ecommercer-microsservicos/assets/94862012/d0e7ea9f-ad23-488d-a527-5f74c05c83f8)
 
 `GeekShopping.MessageBus`:
 - Barramento de mensagens que utiliza RabbitMQ para comunicação assíncrona entre os microsserviços.
+- Permite que serviços se comuniquem sem bloquear uns aos outros.
+
+`GeekShopping.PaymentProcessor`:
+- Mock em que todos os pagamentos como true
+- Implementaçções futuras: Integra-se com gateways de pagamento e sistemas financeiros para concluir transações.
+- Implementaçções futuras: Efetua transações financeiras de forma segura e eficiente.
   
 ## Instalação e Configuração
 
@@ -82,6 +99,8 @@ Pré-requisitos:
 ## Como rodar o Projeto
 
 - Não esqueça de inserir as suas credenciais de banco de dados no `appsettings.json` de cada projeto.
+- Faça o download do Docker na sua maquina
+- rie o container rabbitMQ com interface ```docker run -d --hostname my-rabbit --name some-rabbit -p 5672:5672 -p 15672:15672 rabbitmq:3-management```
 
 No projeto `GeekShopping.web` rode o comando:
 ```
