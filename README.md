@@ -8,8 +8,6 @@
   <img src="https://img.shields.io/github/last-commit/igormorantos/Ecommercer-microsservicos"/>
   <img src="http://img.shields.io/badge/Status-Em Desenvolvimento-green "/>
   <img src ="https://img.shields.io/github/commit-activity/t/igormorantos/Ecommercer-microsservicos"/>
-  <img src="https://img.shields.io/github/languages/count/igormorantos/Ecommercer-microsservicos"/>
-
 </p>
 
 ## Objetivo
